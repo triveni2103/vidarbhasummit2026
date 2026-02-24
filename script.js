@@ -47,11 +47,28 @@
     });
 
 const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+  const navLinks = document.querySelector('.nav-links');
+  const nav = document.querySelector('.nav');
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
+  // Toggle menu on hamburger click
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent outside click from firing
+    navLinks.classList.toggle('active');
+  });
+
+  // Close menu when any nav link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // Close menu when clicking outside navbar
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target)) {
+      navLinks.classList.remove('active');
+    }
+  });
 
   function sendHeight() {
     const height = document.body.scrollHeight;
