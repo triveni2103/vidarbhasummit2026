@@ -52,3 +52,11 @@ const navLinks = document.querySelector('.nav-links');
 hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
+
+  function sendHeight() {
+    const height = document.body.scrollHeight;
+    parent.postMessage(height, "*");
+  }
+
+  window.addEventListener("load", sendHeight);
+  window.addEventListener("resize", sendHeight);
